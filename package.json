@@ -1,0 +1,43 @@
+{
+  "name": "ccp4-ipt.api-solo-project-recipe",
+  "version": "1.0.0",
+  "description": "An API for recipe APP",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "lint": "eslint --fix --ext .js .",
+    "test": "mocha spec && yarn lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayl730/ccp4-ipt.api-solo-project-recipe.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-config-problems": "^5.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.1.0"
+  },
+  "author": "May Lai <http://maylai.xyz>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayl730/ccp4-ipt.api-solo-project-recipe/issues"
+  },
+  "homepage": "https://github.com/mayl730/ccp4-ipt.api-solo-project-recipe#readme"
+}
