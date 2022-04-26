@@ -1,5 +1,5 @@
 const express = require("express");
-const recipe = require("./data/recipe.json");
+const data = require("./data/recipe.json");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,9 +12,17 @@ app.listen(PORT, () => {
 });
 
 app.get("/api/recipe", async (req, res) => {
-  res.send("Hello World!!!!!");
-  // try {
+  try {
+    if (req.query.limit) {
+      await res.status(200).send(data.recipe.slice(0, req.query.limit));
+    } else {
+      await res.status(200).send(data.recipe);
+    }
+  } catch {
+    res.status(500).end();
+  }
 
+  // try {
   //     if (req.query.limit) {
   //     await res.status(200).send(recipe.slice(0, req.query.limit));
   //     } else
