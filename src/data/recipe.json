@@ -1,0 +1,14 @@
+{
+  "recipe": [
+    {
+      "id": 1,
+      "name": "Egg Fried rice",
+      "type": "Chinese"
+    },
+    {
+      "id": 2,
+      "name": "Omlet",
+      "type": "Japanese"
+    }
+  ]
+}
