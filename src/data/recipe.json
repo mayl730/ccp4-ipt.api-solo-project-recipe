@@ -13,7 +13,7 @@
       "userId": 142,
       "title": "Omlet",
       "description": "This is a description with some words. Lorem Ipsum........",
-      "calories": 550,
+      "calories": 300,
       "type": "Japanese"
     },
     {
@@ -31,6 +31,14 @@
       "description": "This is a description with some words. Lorem Ipsum........",
       "calories": 450,
       "type": "Japanese"
+    },
+    {
+      "id": 5,
+      "userId": 999,
+      "title": "Egg Fried rice",
+      "description": "Thai Egg Fried Rice!!",
+      "calories": 1300,
+      "type": "Thai"
     }
   ]
 }
