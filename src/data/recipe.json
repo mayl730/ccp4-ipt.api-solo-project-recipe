@@ -2,13 +2,27 @@
   "recipe": [
     {
       "id": 1,
-      "name": "Egg Fried rice",
+      "userId": 140,
+      "title": "Egg Fried rice",
+      "description": "This is a description with some words. Lorem Ipsum........",
+      "calories": 750,
       "type": "Chinese"
     },
     {
       "id": 2,
-      "name": "Omlet",
+      "userId": 142,
+      "title": "Omlet",
+      "description": "This is a description with some words. Lorem Ipsum........",
+      "calories": 550,
       "type": "Japanese"
+    },
+    {
+      "id": 3,
+      "userId": 142,
+      "title": "Meatball Pasta",
+      "description": "This is a description with some words. Lorem Ipsum........",
+      "calories": 670,
+      "type": "Italian"
     }
   ]
 }
