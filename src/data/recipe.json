@@ -23,6 +23,14 @@
       "description": "This is a description with some words. Lorem Ipsum........",
       "calories": 670,
       "type": "Italian"
+    },
+    {
+      "id": 4,
+      "userId": 142,
+      "title": "Salmon Sushi",
+      "description": "This is a description with some words. Lorem Ipsum........",
+      "calories": 450,
+      "type": "Japanese"
     }
   ]
 }
