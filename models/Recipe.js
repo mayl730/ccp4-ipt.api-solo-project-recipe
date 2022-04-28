@@ -33,6 +33,27 @@ class Recipe {
       return err;
     }
   }
+
+  async create(id, userID, title, description, calories) {
+    if (!id || !title || !description) {
+      return "Please enter id, title & description";
+    }
+
+    try {
+      await this.db("recipe")
+        .insert({
+          id: id,
+          userID: userID,
+          title: title,
+          description: description,
+          calories: calories,
+        })
+        .timeout(1500);
+      return "Successfully created!";
+    } catch (err) {
+      return "Fail request";
+    }
+  }
 }
 
 module.exports = new Recipe();
