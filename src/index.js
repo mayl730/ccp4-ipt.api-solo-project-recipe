@@ -8,10 +8,8 @@ const recipeController = require("../controllers/recipeController");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-
 app.get("/", (req, res) => {
-  res.send("Welcome to May's Recipe API");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.listen(PORT, () => {
@@ -36,6 +34,7 @@ app.use("/api/recipe", recipeController);
 // });
 
 // app.get("/api/recipe/?calories", async (req, res) => {});
+// // /customers?id={"lt": 100, "gt": 30}&page={"start": 1, "size": 10}
 
 // app.get("/api/recipe/:idOrName", async (req, res) => {
 //   const param = req.params.idOrName;
@@ -47,5 +46,3 @@ app.use("/api/recipe", recipeController);
 //     res.status(500).end();
 //   }
 // });
-
-// // /customers?id={"lt": 100, "gt": 30}&page={"start": 1, "size": 10}

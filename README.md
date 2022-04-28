@@ -8,6 +8,8 @@ http://localhost:3000/api/recipe?limit=2
 http://localhost:3000/api/recipe/:idOrName
 http://localhost:3000/api/recipe/Egg%20Fried%20Rice
 
+https://www.npmjs.com/package/express-query-parser
+
 GET /api/v1/magazines.json?year=2011&sort=desc HTTP/1.1
 
 ## Objectives

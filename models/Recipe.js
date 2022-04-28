@@ -35,6 +35,25 @@ class Recipe {
     }
   }
 
+  async findByLimit(limit) {
+    try {
+      return await this.db("recipe").select().limit(limit).timeout(1500);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async findByCalories(lt, gt) {
+    try {
+      return await this.db("recipe")
+        .select()
+        .whereBetween("calories", [gt, lt])
+        .timeout(1500);
+    } catch (err) {
+      return err;
+    }
+  }
+
   async create(id, userID, title, description, calories) {
     try {
       await this.db("recipe")
