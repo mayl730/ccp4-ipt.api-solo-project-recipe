@@ -1,3 +1,4 @@
+const { reduceRight } = require("lodash");
 const utils = require("../src/utils/utils");
 
 class Recipe {
@@ -63,6 +64,14 @@ class Recipe {
         })
         .timeout(1500);
       return "Successfully updated!";
+    } catch (err) {
+      return err;
+    }
+  }
+  async delete(id) {
+    try {
+      await this.db("recipe").where("id", "=", id).del();
+      return "Sucessfully deleted!";
     } catch (err) {
       return err;
     }

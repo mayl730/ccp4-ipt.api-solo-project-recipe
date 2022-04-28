@@ -38,4 +38,10 @@ router.patch("/:id", async (req, res) => {
   return res.status(200).send(["Recipe is updated!", id, req.body]).end();
 });
 
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  await Recipe.delete(id);
+  return res.status(200).send(["Recipe is removed!", id]).end();
+});
+
 module.exports = router;
