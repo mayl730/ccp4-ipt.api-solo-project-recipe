@@ -1,6 +1,5 @@
 const express = require("express");
 const { route } = require("express/lib/application");
-const { user } = require("pg/lib/defaults");
 const Recipe = require("../models/Recipe");
 const router = express.Router();
 
@@ -30,32 +29,12 @@ router.get("/", async (req, res) => {
   return res.send(recipe).status(200);
 });
 
-// Get By ID
-
+// Get By ID or Name
 router.get("/:idOrName", async (req, res) => {
   const param = req.params.idOrName;
   const recipe = await Recipe.findOne(param);
   res.send(recipe).status(200);
 });
-
-// app.get("/api/recipe", async (req, res) => {
-//   try {
-//     if (req.query.limit) {
-//       await res.status(200).send(data.recipe.slice(0, req.query.limit));
-//     }
-//     if (req.query.calories) {
-//       // http://localhost:3000/api/recipe?calories={"largerthan":500, "smallerthan:"}
-//       await res.status(200).send(req.query.calories.lt);
-//     }
-//     await res.status(200).send(data.recipe);
-//   } catch {
-//     res.status(500).end();
-//   }
-// });
-
-// Get By Calories
-// app.get("/api/recipe/?calories", async (req, res) => {});
-// // /customers?id={"lt": 100, "gt": 30}&page={"start": 1, "size": 10}
 
 // Get By Ingredients
 
@@ -74,7 +53,6 @@ router.post("/", async (req, res) => {
 });
 
 // Update a Recipe
-
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
   const { userID, title, description, calories } = req.body;
