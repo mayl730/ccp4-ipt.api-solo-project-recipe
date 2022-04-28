@@ -34,6 +34,7 @@ const utlis = {
     }
     // return index;
   },
+  validData: (obj) => {},
 };
 
 module.exports = utlis;

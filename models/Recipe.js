@@ -35,10 +35,6 @@ class Recipe {
   }
 
   async create(id, userID, title, description, calories) {
-    if (!id || !title || !description) {
-      return "Please enter id, title & description";
-    }
-
     try {
       await this.db("recipe")
         .insert({
@@ -51,7 +47,24 @@ class Recipe {
         .timeout(1500);
       return "Successfully created!";
     } catch (err) {
-      return "Fail request";
+      return err;
+    }
+  }
+
+  async update(id, userID, title, description, calories) {
+    try {
+      await this.db("recipe")
+        .where("id", "=", id)
+        .update({
+          userID: userID,
+          title: title,
+          description: description,
+          calories: calories,
+        })
+        .timeout(1500);
+      return "Successfully updated!";
+    } catch (err) {
+      return err;
     }
   }
 }
