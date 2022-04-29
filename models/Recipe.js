@@ -7,41 +7,26 @@ class Recipe {
   }
 
   async findMany() {
-    return await this.db
-      .select({
-        id: "recipe.id",
-        title: "recipe.title",
-        description: "recipe.description",
-        calories: "recipe.calories",
-        type: "recipe.type",
-        ingredient: "ingredient.name",
-      })
-      .from("recipe")
-      .orderBy("recipe.id")
-      .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
-      .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
-      .then((resultBefore) => {
-        let resultAfter = [];
-        let pushedId = {};
-        resultBefore.forEach((data) => {
-          if (data.id in pushedId) {
-            const index = pushedId[data.id];
-            resultAfter[index].ingredients.push(data.ingredient);
-          } else {
-            const newData = {
-              id: data.id,
-              title: data.title,
-              description: data.description,
-              calories: data.calories,
-              type: data.type,
-              ingredients: [data.ingredient],
-            };
-            resultAfter.push(newData);
-            pushedId[data.id] = resultAfter.length - 1;
-          }
+    try {
+      return await this.db
+        .select({
+          id: "recipe.id",
+          title: "recipe.title",
+          description: "recipe.description",
+          calories: "recipe.calories",
+          type: "recipe.type",
+          ingredient: "ingredient.name",
+        })
+        .from("recipe")
+        .orderBy("recipe.id")
+        .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .then((resultBefore) => {
+          return utils.recipeObject(resultBefore);
         });
-        return resultAfter;
-      });
+    } catch (err) {
+      return err;
+    }
   }
   async findOne(idOrName) {
     try {
@@ -65,34 +50,32 @@ class Recipe {
             " ingredient.id"
           )
           .then((resultBefore) => {
-            let resultAfter = [];
-            let pushedId = {};
-            resultBefore.forEach((data) => {
-              if (data.id in pushedId) {
-                const index = pushedId[data.id];
-                resultAfter[index].ingredients.push(data.ingredient);
-              } else {
-                const newData = {
-                  id: data.id,
-                  title: data.title,
-                  description: data.description,
-                  calories: data.calories,
-                  type: data.type,
-                  ingredients: [data.ingredient],
-                };
-                resultAfter.push(newData);
-                pushedId[data.id] = resultAfter.length - 1;
-              }
-            });
-            return resultAfter[0];
+            return utils.recipeObject(resultBefore)[0];
           });
       }
 
       if (!utils.processIdOrName(idOrName)) {
-        return await this.db("recipe")
-          .select(["id", "userID", "title", "description", "calories"])
-          .where("title", idOrName)
-          .timeout(1500);
+        return await this.db
+          .select({
+            id: "recipe.id",
+            title: "recipe.title",
+            description: "recipe.description",
+            calories: "recipe.calories",
+            type: "recipe.type",
+            ingredient: "ingredient.name",
+          })
+          .from("recipe")
+          .where("recipe.title", idOrName)
+          .orderBy("recipe.id")
+          .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+          .join(
+            "ingredient",
+            "recipe_ingredient.ingredient_id",
+            " ingredient.id"
+          )
+          .then((resultBefore) => {
+            return utils.recipeObject(resultBefore)[0];
+          });
       }
     } catch (err) {
       return err;
@@ -101,7 +84,23 @@ class Recipe {
 
   async findByLimit(limit) {
     try {
-      return await this.db("recipe").select().limit(limit).timeout(1500);
+      return await this.db
+        .select({
+          id: "recipe.id",
+          title: "recipe.title",
+          description: "recipe.description",
+          calories: "recipe.calories",
+          type: "recipe.type",
+          ingredient: "ingredient.name",
+        })
+        .from("recipe")
+        .where("recipe.id", "<=", limit)
+        .orderBy("recipe.id")
+        .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .then((resultBefore) => {
+          return utils.recipeObject(resultBefore);
+        });
     } catch (err) {
       return err;
     }
@@ -118,7 +117,7 @@ class Recipe {
     }
   }
 
-  async create(id, userID, title, description, calories) {
+  async create(id, userID, title, description, calories, type) {
     try {
       await this.db("recipe")
         .insert({
@@ -127,6 +126,7 @@ class Recipe {
           title: title,
           description: description,
           calories: calories,
+          type: type,
         })
         .timeout(1500);
       return "Successfully created!";
@@ -135,7 +135,7 @@ class Recipe {
     }
   }
 
-  async update(id, userID, title, description, calories) {
+  async update(id, userID, title, description, calories, type) {
     try {
       await this.db("recipe")
         .where("id", "=", id)
@@ -144,6 +144,7 @@ class Recipe {
           title: title,
           description: description,
           calories: calories,
+          type: type,
         })
         .timeout(1500);
       return "Successfully updated!";

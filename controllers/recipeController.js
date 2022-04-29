@@ -48,8 +48,8 @@ router.get("/:idOrName", async (req, res) => {
 // POST a recipe
 router.post("/", async (req, res) => {
   try {
-    const { id, userID, title, description, calories } = req.body;
-    await Recipe.create(id, userID, title, description, calories);
+    const { id, userID, title, description, calories, type } = req.body;
+    await Recipe.create(id, userID, title, description, calories, type);
     return res.status(201).send(["Recipe is created!", req.body]).end();
   } catch (err) {
     return res.status(204).send(err).end();
@@ -60,9 +60,12 @@ router.post("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const { userID, title, description, calories } = req.body;
-    await Recipe.update(id, userID, title, description, calories);
-    return res.status(200).send(["Recipe is updated!", id, req.body]).end();
+    const { userID, title, description, calories, type } = req.body;
+    await Recipe.update(id, userID, title, description, calories, type);
+    return res
+      .status(200)
+      .send(["Recipe is updated! id: ", id, req.body])
+      .end();
   } catch (err) {
     return res.status(404).send(err).end();
   }

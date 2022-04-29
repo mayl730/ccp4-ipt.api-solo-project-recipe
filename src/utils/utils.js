@@ -1,38 +1,32 @@
 const utlis = {
-  // processIdOrName: (param, data) => {
-  //   let index = [];
-  //   if (isNaN(param)) {
-  //     data.forEach((item, i) => {
-  //       if (item.title.toLowerCase() === param.toLowerCase()) {
-  //         index.push(i);
-  //       }
-  //     });
-  //   } else {
-  //     data.forEach((item, i) => {
-  //       if (Number(item.id) === Number(param)) {
-  //         index.push(i);
-  //       }
-  //     });
-  //   }
-  //   return index;
-  // },
   processIdOrName: (param) => {
     if (isNaN(param)) {
       return false;
-      // data.forEach((item, i) => {
-      //   if (item.title.toLowerCase() === param.toLowerCase()) {
-      //     index.push(i);
-      //   }
-      // });
     } else {
       return true;
-      // data.forEach((item, i) => {
-      //   if (Number(item.id) === Number(param)) {
-      //     index.push(i);
-      //   }
-      // });
     }
-    // return index;
+  },
+  recipeObject: (resultBefore) => {
+    let resultAfter = [];
+    let pushedId = {};
+    resultBefore.forEach((data) => {
+      if (data.id in pushedId) {
+        const index = pushedId[data.id];
+        resultAfter[index].ingredients.push(data.ingredient);
+      } else {
+        const newData = {
+          id: data.id,
+          title: data.title,
+          description: data.description,
+          calories: data.calories,
+          type: data.type,
+          ingredients: [data.ingredient],
+        };
+        resultAfter.push(newData);
+        pushedId[data.id] = resultAfter.length - 1;
+      }
+    });
+    return resultAfter;
   },
   validData: (obj) => {},
 };
