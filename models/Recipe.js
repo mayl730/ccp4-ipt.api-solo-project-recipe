@@ -7,13 +7,41 @@ class Recipe {
   }
 
   async findMany() {
-    try {
-      return await this.db("recipe")
-        .select(["id", "userID", "title", "description", "calories"])
-        .timeout(1500);
-    } catch (err) {
-      return err;
-    }
+    return await this.db
+      .select({
+        id: "recipe.id",
+        title: "recipe.title",
+        description: "recipe.description",
+        calories: "recipe.calories",
+        type: "recipe.type",
+        ingredient: "ingredient.name",
+      })
+      .from("recipe")
+      .orderBy("recipe.id")
+      .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+      .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+      .then((resultBefore) => {
+        let resultAfter = ["something"];
+        let pushedId = {};
+        resultBefore.forEach((data) => {
+          if (data.id in pushedId) {
+            const index = pushedId[data.id];
+            resultAfter[index].ingredients.push(data.ingredient);
+          } else {
+            const newData = {
+              id: data.id,
+              title: data.title,
+              description: data.description,
+              calories: data.calories,
+              type: data.type,
+              ingredients: [data.ingredient],
+            };
+            resultAfter.push(newData);
+            pushedId[data.id] = resultAfter.length - 1;
+          }
+        });
+        return resultAfter;
+      });
   }
   async findOne(idOrName) {
     try {
