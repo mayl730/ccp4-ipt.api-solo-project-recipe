@@ -21,7 +21,7 @@ class Recipe {
       .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
       .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
       .then((resultBefore) => {
-        let resultAfter = ["something"];
+        let resultAfter = [];
         let pushedId = {};
         resultBefore.forEach((data) => {
           if (data.id in pushedId) {
