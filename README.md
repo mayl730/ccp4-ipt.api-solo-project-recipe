@@ -3,6 +3,7 @@
 An API solo project for recipe (CCP4)
 This was created during my time as a student at Code Chrysalis.
 
+![image](./images/top.jpeg)
 http://localhost:3000/api/recipe
 http://localhost:3000/api/recipe?limit=2
 http://localhost:3000/api/recipe/:idOrName
