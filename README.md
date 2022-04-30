@@ -1,4 +1,4 @@
-# Recipe API -- Find Recipe with Calories or Ingredients
+# Recipe API: Find Recipe with Calories or Ingredients
 
 This was created during my time as a student at Code Chrysalis.
 
