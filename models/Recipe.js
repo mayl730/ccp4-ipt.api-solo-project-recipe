@@ -126,7 +126,7 @@ class Recipe {
           description: "recipe.description",
           calories: "recipe.calories",
           type: "recipe.type",
-          ingredient: "ingredient.name",
+          // ingredient: "ingredient.name",
         })
         .from("recipe")
         .where("ingredient.name", "=", param)
