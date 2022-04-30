@@ -9,7 +9,7 @@ exports.seed = async function (knex) {
     {
       id: 1,
       userID: 140,
-      title: "Egg Fried rice",
+      title: "Egg Fried Rice",
       description: "This is a description with some words. Lorem Ipsum........",
       calories: 750,
       type: "Lunch",
@@ -41,7 +41,7 @@ exports.seed = async function (knex) {
     {
       id: 5,
       userID: 999,
-      title: "Thai Fried rice",
+      title: "Thai Fried Rice",
       description: "Thai Traditional Fried Rice.",
       calories: 1300,
       type: "Lunch",

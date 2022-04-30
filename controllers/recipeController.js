@@ -61,8 +61,25 @@ router.post("/:id/ingredient", async (req, res) => {
   try {
     const id = req.params.id;
     const { ingredientID, amount } = req.body;
-    await Recipe.addIngredient(id, ingredientID, amount);
-    return res.status(201).send(["Ingredient is added!", req.body]).end();
+    await Recipe.addIngredientToRecipe(id, ingredientID, amount);
+    return res
+      .status(201)
+      .send(["Ingredient is added to a recipe!", req.body])
+      .end();
+  } catch (err) {
+    return res.status(204).send(err).end();
+  }
+});
+
+// Post an ingredient
+router.post("/ingredient", async (req, res) => {
+  try {
+    const { id, name, description } = req.body;
+    await Recipe.addIngredient(id, name, description);
+    return res
+      .status(201)
+      .send(["Ingredient is added to the ingredient list!", req.body])
+      .end();
   } catch (err) {
     return res.status(204).send(err).end();
   }
