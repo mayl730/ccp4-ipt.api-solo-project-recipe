@@ -117,6 +117,14 @@ class Recipe {
     }
   }
 
+  async findManyIngrident() {
+    try {
+      return await this.db.select("*").from("recipe_ingredient").timeout(1500);
+    } catch (err) {
+      return err;
+    }
+  }
+
   async create(id, userID, title, description, calories, type) {
     try {
       await this.db("recipe")

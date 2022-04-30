@@ -43,6 +43,16 @@ router.get("/:idOrName", async (req, res) => {
   }
 });
 
+// Get All Ingredients
+router.get("/test", async (req, res) => {
+  try {
+    const ingredient = await Recipe.findMany();
+    return res.send(ingredient).status(200);
+  } catch (err) {
+    return res.status(404).send(err).end();
+  }
+});
+
 // Get Recipe By Ingredients
 
 // POST a recipe
@@ -65,20 +75,6 @@ router.post("/:id/ingredient", async (req, res) => {
     return res
       .status(201)
       .send(["Ingredient is added to a recipe!", req.body])
-      .end();
-  } catch (err) {
-    return res.status(204).send(err).end();
-  }
-});
-
-// Post an ingredient
-router.post("/ingredient", async (req, res) => {
-  try {
-    const { id, name, description } = req.body;
-    await Recipe.addIngredient(id, name, description);
-    return res
-      .status(201)
-      .send(["Ingredient is added to the ingredient list!", req.body])
       .end();
   } catch (err) {
     return res.status(204).send(err).end();
