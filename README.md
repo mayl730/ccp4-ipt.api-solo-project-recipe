@@ -1,6 +1,5 @@
-# ccp4-ipt.api-solo-project-recipe
+# Recipe API -- Find Recipe with Food or Calories
 
-An API solo project for recipe (CCP4)
 This was created during my time as a student at Code Chrysalis.
 
 ![image](./images/top.jpeg)
@@ -13,13 +12,34 @@ https://www.npmjs.com/package/express-query-parser
 
 GET /api/v1/magazines.json?year=2011&sort=desc HTTP/1.1
 
-## Objectives
+## Features
 
-- Create a CRUD API service using Express / GraphQL, Relational database
-- Write tests for your API
-- Seed your database with interesting data
-- Be able to document your API endpoints for other developers to use, aka a beautiful README
-- Create a basic/simple frontend
+- Get Recipes with id Or Name
+- Filter Recipe with calories or ingredients
+- Create Recipe to your database
+- Create Ingredient to your database
+
+## API Endpoints
+
+### Recipe
+
+Recipes endpoint returning recipe items.
+
+- GET api/recipe
+  Get all recipes from the database.
+
+```
+{
+        "id": 1,
+        "title": "Egg Fried Rice",
+        "description": "This is a description with some words."
+    },
+    {
+        "id": 2,
+        "title": "Omlet",
+        "description": "This is a description with some words."
+    }....
+```
 
 ## Summary
 
