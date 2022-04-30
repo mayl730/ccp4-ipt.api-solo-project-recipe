@@ -12,7 +12,7 @@ exports.seed = async function (knex) {
     { recipe_id: 2, ingredient_id: 1, amount: "2" },
     { recipe_id: 2, ingredient_id: 2, amount: "150g" },
     { recipe_id: 2, ingredient_id: 6, amount: "3g" },
-    { recipe_id: 3, ingredient_id: 1, amount: "2" },
+    { recipe_id: 3, ingredient_id: 10, amount: "500ml" },
     { recipe_id: 3, ingredient_id: 8, amount: "150g" },
     { recipe_id: 3, ingredient_id: 9, amount: "3g" },
     { recipe_id: 4, ingredient_id: 2, amount: "150g" },

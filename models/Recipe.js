@@ -117,9 +117,87 @@ class Recipe {
     }
   }
 
+  async findByIngredient(param) {
+    try {
+      return await this.db
+        .select({
+          id: "recipe.id",
+          title: "recipe.title",
+          description: "recipe.description",
+          calories: "recipe.calories",
+          type: "recipe.type",
+          ingredient: "ingredient.name",
+        })
+        .from("recipe")
+        .where("ingredient.name", "=", param)
+        .orderBy("recipe.id")
+        .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .then((resultBefore) => {
+          return utils.recipeObject(resultBefore);
+        });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  // async findOne(idOrName) {
+  //   try {
+  //     if (utils.processIdOrName(idOrName)) {
+  //       return await this.db
+  //         .select({
+  //           id: "recipe.id",
+  //           title: "recipe.title",
+  //           description: "recipe.description",
+  //           calories: "recipe.calories",
+  //           type: "recipe.type",
+  //           ingredient: "ingredient.name",
+  //         })
+  //         .from("recipe")
+  //         .where("recipe.id", idOrName)
+  //         .orderBy("recipe.id")
+  //         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+  //         .join(
+  //           "ingredient",
+  //           "recipe_ingredient.ingredient_id",
+  //           " ingredient.id"
+  //         )
+  //         .then((resultBefore) => {
+  //           return utils.recipeObject(resultBefore)[0];
+  //         });
+  //     }
+
+  //     if (!utils.processIdOrName(idOrName)) {
+  //       return await this.db
+  //         .select({
+  //           id: "recipe.id",
+  //           title: "recipe.title",
+  //           description: "recipe.description",
+  //           calories: "recipe.calories",
+  //           type: "recipe.type",
+  //           ingredient: "ingredient.name",
+  //         })
+  //         .from("recipe")
+  //         .where("recipe.title", idOrName)
+  //         .orderBy("recipe.id")
+  //         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
+  //         .join(
+  //           "ingredient",
+  //           "recipe_ingredient.ingredient_id",
+  //           " ingredient.id"
+  //         )
+  //         .then((resultBefore) => {
+  //           return utils.recipeObject(resultBefore)[0];
+  //         });
+  //     }
+  //   } catch (err) {
+  //     return err;
+  //   }
+  // }
+
   async findManyIngrident() {
     try {
-      return await this.db.select("*").from("recipe_ingredient").timeout(1500);
+      return await this.db.select("*").from("ingredient").timeout(1500);
     } catch (err) {
       return err;
     }

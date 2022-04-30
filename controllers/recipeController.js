@@ -43,17 +43,16 @@ router.get("/:idOrName", async (req, res) => {
   }
 });
 
-// Get All Ingredients
-router.get("/test", async (req, res) => {
+// Get Recipe By Ingredients
+router.get("/ingredient/:name", async (req, res) => {
   try {
-    const ingredient = await Recipe.findMany();
-    return res.send(ingredient).status(200);
+    const param = req.params.name;
+    const recipe = await Recipe.findByIngredient(param);
+    res.send(recipe).status(200);
   } catch (err) {
     return res.status(404).send(err).end();
   }
 });
-
-// Get Recipe By Ingredients
 
 // POST a recipe
 router.post("/", async (req, res) => {
