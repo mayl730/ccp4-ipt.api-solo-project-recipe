@@ -25,8 +25,7 @@ GET /api/v1/magazines.json?year=2011&sort=desc HTTP/1.1
 
 Recipes endpoint returning recipe items.
 
-- GET api/recipe/
-
+- `GET api/recipe/`
   Get all recipes from the database.
 
 ```JSON
@@ -39,11 +38,10 @@ Recipes endpoint returning recipe items.
     "id": 2,
     "title": "Omlet",
     "description": "This is a description with some words."
-} ...
+}
 ```
 
-- GET api/recipe/{id Or name}
-
+- `GET api/recipe/{id Or name}`
   Get recipe by id or name
 
 ```JSON
@@ -57,6 +55,22 @@ Recipes endpoint returning recipe items.
         "Rice",
         "Thai Herb Mixture"
     ]
+}
+```
+
+- `GET api/recipe?limit={number}`
+  Get first x recipes with limitations.
+
+```JSON
+{
+    "id": 1,
+    "title": "Egg Fried Rice",
+    "description": "This is a description with some words."
+},
+{
+    "id": 2,
+    "title": "Omlet",
+    "description": "This is a description with some words."
 }
 ```
 
@@ -77,54 +91,35 @@ Recipes endpoint returning recipe items.
 } ...
 ```
 
-- GET api/recipe?limit={number}
-
-  Get first x recipes with limitations.
-
-```JSON
-{
-    "id": 1,
-    "title": "Egg Fried Rice",
-    "description": "This is a description with some words."
-},
-{
-    "id": 2,
-    "title": "Omlet",
-    "description": "This is a description with some words."
-} ...
-```
-
-- GET api/recipe?calories={"lt": number, "gt": number}
-
+- `GET api/recipe?calories={"lt": number, "gt": number}`
   Get recipes between calories' range.
-
   (lt = less than, gt = greater than)
 
 ```JSON
 [
-    "Recipe with calories less than 2000 and greater than 400:",
-    [
-        {
-            "id": 1,
-            "userID": 140,
-            "title": "Egg Fried rice",
-            "description": "This is a description with some words. Lorem Ipsum........",
-            "calories": 750,
-            "type": "Lunch"
-        },
-        {
-            "id": 3,
-            "userID": 142,
-            "title": "Meatball Pasta",
-            "description": "This is a description with some words. Lorem Ipsum........",
-            "calories": 670,
-            "type": "Dinner"
-        }
-    ]
+  "Recipe with calories less than 2000 and greater than 400:",
+  [
+      {
+          "id": 1,
+          "userID": 140,
+          "title": "Egg Fried rice",
+          "description": "This is a description with some words. Lorem Ipsum........",
+          "calories": 750,
+          "type": "Lunch"
+      },
+      {
+          "id": 3,
+          "userID": 142,
+          "title": "Meatball Pasta",
+          "description": "This is a description with some words. Lorem Ipsum........",
+          "calories": 670,
+          "type": "Dinner"
+      }
+  ]
 ]
 ```
 
-- GET api/recipe/ingredient/{ingredient name}
+- `GET api/recipe/ingredient/{ingredient name}`
   Get recipes with ingredient required.
 
 ```JSON
@@ -150,7 +145,7 @@ Recipes endpoint returning recipe items.
             "Egg"
         ]
     }
-]
+ ]
 ]
 ```
 
