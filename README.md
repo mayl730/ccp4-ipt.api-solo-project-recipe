@@ -221,3 +221,25 @@ Create a recipe. Please follow the JSON request format below:
   "description": "Easy to buy in a local super market"
 }
 ```
+
+- `PATCH api/ingredient/{id}`
+
+Update an ingredient with provided id.
+
+```JSON
+{
+  "name": "Herb Mixture",
+  "description": "Easy to buy in a local store"
+}
+```
+
+- `Delete api/ingredient/{id}`
+
+Delete an ingredient with provided id.
+
+```JSON
+{
+  "name": "Herb Mixture",
+  "description": "Easy to buy in a local store"
+}
+```
