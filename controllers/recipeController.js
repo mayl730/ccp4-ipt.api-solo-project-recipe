@@ -43,7 +43,7 @@ router.get("/:idOrName", async (req, res) => {
   }
 });
 
-// Get By Ingredients
+// Get Recipe By Ingredients
 
 // POST a recipe
 router.post("/", async (req, res) => {
@@ -51,6 +51,18 @@ router.post("/", async (req, res) => {
     const { id, userID, title, description, calories, type } = req.body;
     await Recipe.create(id, userID, title, description, calories, type);
     return res.status(201).send(["Recipe is created!", req.body]).end();
+  } catch (err) {
+    return res.status(204).send(err).end();
+  }
+});
+
+// POST ingredient to a Recipe
+router.post("/:id/ingredient", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { ingredientID, amount } = req.body;
+    await Recipe.addIngredient(id, ingredientID, amount);
+    return res.status(201).send(["Ingredient is added!", req.body]).end();
   } catch (err) {
     return res.status(204).send(err).end();
   }
