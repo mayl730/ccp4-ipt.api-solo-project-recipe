@@ -1,8 +1,5 @@
-const db = require("../src/knex");
+const db = require("./knex");
 const express = require("express");
-// const data = require("./data/recipe.json");
-// const utils = require("./utils/utils");
-// const _ = require("lodash");
 const recipeController = require("../controllers/recipeController");
 const ingredientController = require("../controllers/ingredientController");
 
