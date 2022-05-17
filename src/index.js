@@ -12,12 +12,6 @@ const PORT = process.env.PORT || 9000;
     await db.migrate.latest();
     console.log("Seeding data");
     await db.seed.run();
-
-    const server = new ApolloServer({ typeDefs, resolvers });
-    console.log("Starting server");
-    await server.start();
-    server.applyMiddleware({ app, path: "/" });
-    app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
   } catch (err) {
     console.error("Error starting app!", err);
     process.exit(-1);
@@ -26,6 +20,10 @@ const PORT = process.env.PORT || 9000;
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
+});
+
+app.listen(PORT, () => {
+  console.log("server running on port 9000");
 });
 
 app.use("/api/recipe", recipeController);
