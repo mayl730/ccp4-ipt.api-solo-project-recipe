@@ -10,7 +10,7 @@ module.exports = {
   debug: true,
   connection: process.env.DB_URL,
   migrations: {
-    // tableName: "knex_migrations",
+    tableName: "knex_migrations",
     directory: "./db/migrations",
   },
   seeds: {
@@ -73,4 +73,4 @@ module.exports = {
 //   database: process.env.DB_NAME,
 //   user: process.env.DB_USER,
 //   password: process.env.DB_PASSWORD,
-// }
+// },
