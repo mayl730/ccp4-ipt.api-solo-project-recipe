@@ -7,13 +7,8 @@ require("dotenv").config({
  */
 module.exports = {
   client: "pg",
-  connection: process.env.DATABASE_URL || {
-    host: process.env.DB_HOST || "127.0.0.1",
-    port: process.env.DB_PORT || 5432,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-  },
+  debug: true,
+  connection: process.env.DB_URL,
   migrations: {
     // tableName: "knex_migrations",
     directory: "./db/migrations",
@@ -21,6 +16,7 @@ module.exports = {
   seeds: {
     directory: "./db/seeds",
   },
+  ssl: true,
 };
 
 // // Update with your config settings.
@@ -70,3 +66,11 @@ module.exports = {
 //   }
 
 // };
+
+// || {
+//   host: process.env.DB_HOST || "127.0.0.1",
+//   port: process.env.DB_PORT || 5432,
+//   database: process.env.DB_NAME,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+// }
