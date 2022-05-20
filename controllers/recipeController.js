@@ -16,13 +16,7 @@ router.get("/", async (req, res) => {
     if (req.query.calories) {
       const { lt, gt } = JSON.parse(req.query.calories);
       recipes = await Recipe.findByCalories(lt, gt);
-      return res
-        .status(200)
-        .send([
-          `Recipe with calories less than ${lt} and greater than ${gt}:`,
-          recipes,
-        ])
-        .end();
+      return res.status(200).send(recipes).end();
     }
 
     const recipe = await Recipe.findMany();
