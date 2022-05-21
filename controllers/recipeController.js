@@ -4,7 +4,7 @@ const Recipe = require("../models/Recipe");
 const router = express.Router();
 
 router.use(express.json());
-// Get All
+// Get Alll
 router.get("/", async (req, res) => {
   try {
     // Get First X Items
