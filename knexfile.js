@@ -17,6 +17,9 @@ module.exports = {
     directory: "./db/seeds",
   },
   ssl: { rejectUnauthorized: false },
+  options: {
+    ssl: env.bool("DATABASE_SSL", false),
+  },
 };
 
 // // Update with your config settings.
