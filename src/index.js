@@ -7,12 +7,6 @@ const ingredientController = require("../controllers/ingredientController");
 const app = express();
 const PORT = process.env.PORT || 9000;
 
-// if (process.env.NODE_ENV === "production") {
-//   //server static content
-//   //npm run build
-
-// }
-
 app.use(cors());
 (async () => {
   try {
