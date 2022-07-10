@@ -16,6 +16,7 @@ class Recipe {
           calories: "recipe.calories",
           type: "recipe.type",
           ingredient: "ingredient.name",
+          image: "recipe.image",
         })
         .from("recipe")
         .orderBy("recipe.id")
@@ -39,6 +40,7 @@ class Recipe {
             calories: "recipe.calories",
             type: "recipe.type",
             ingredient: "ingredient.name",
+            image: "recipe.image",
           })
           .from("recipe")
           .where("recipe.id", idOrName)
@@ -63,6 +65,7 @@ class Recipe {
             calories: "recipe.calories",
             type: "recipe.type",
             ingredient: "ingredient.name",
+            image: "recipe.image",
           })
           .from("recipe")
           .where("recipe.title", idOrName)
@@ -92,6 +95,7 @@ class Recipe {
           calories: "recipe.calories",
           type: "recipe.type",
           ingredient: "ingredient.name",
+          image: "recipe.image",
         })
         .from("recipe")
         .where("recipe.id", "<=", limit)
@@ -127,6 +131,7 @@ class Recipe {
           calories: "recipe.calories",
           type: "recipe.type",
           ingredient: "ingredient.name",
+          image: "recipe.image",
         })
         .from("recipe")
         .where("ingredient.name", "=", param)
@@ -207,6 +212,7 @@ class Recipe {
           description: description,
           calories: calories,
           type: type,
+          image: "recipe.image",
         })
         .timeout(1500);
       return "Successfully updated!";
