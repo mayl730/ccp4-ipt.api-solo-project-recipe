@@ -57,6 +57,7 @@ typings/
 
 # dotenv environment variables file
 .env
+pg_hba.conf
 
 # next.js build output
 .next
