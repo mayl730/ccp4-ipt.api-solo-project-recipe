@@ -154,7 +154,7 @@ class Recipe {
     }
   }
 
-  async create(id, userID, title, description, calories, type) {
+  async create(id, userID, title, description, calories, type, image) {
     try {
       await this.db("recipe")
         .insert({
@@ -164,6 +164,7 @@ class Recipe {
           description: description,
           calories: calories,
           type: type,
+          image: image,
         })
         .timeout(1500);
       return "Successfully created!";
