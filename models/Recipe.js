@@ -212,7 +212,6 @@ class Recipe {
           description: description,
           calories: calories,
           type: type,
-          image: "recipe.image",
         })
         .timeout(1500);
       return "Successfully updated!";
