@@ -18,25 +18,17 @@ class Ingredient {
     const [id] = await this.db("ingredient")
       .insert({
         name: name,
-        description: description,
       })
       .returning("id");
     return id;
   }
-
-  async update(id, name, description) {
-    await this.db("ingredient")
-      .where("id", "=", id)
-      .update({
-        name: name,
-        description: description,
-      })
-      .timeout(1500);
-    return "Successfully updated an ingredient!";
-  }
   async delete(id) {
-    await this.db("ingredient").where("id", "=", id).del();
-    return "Sucessfully deleted an ingredient!";
+    try {
+      await this.db("ingredient").where("id", "=", id).del();
+      return "Sucessfully deleted!";
+    } catch (err) {
+      return err;
+    }
   }
 }
 
