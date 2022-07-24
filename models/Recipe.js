@@ -154,23 +154,18 @@ class Recipe {
     }
   }
 
-  async create(id, userID, title, description, calories, type, image) {
-    try {
-      await this.db("recipe")
-        .insert({
-          id: id,
-          userID: userID,
-          title: title,
-          description: description,
-          calories: calories,
-          type: type,
-          image: image,
-        })
-        .timeout(1500);
-      return "Successfully created!";
-    } catch (err) {
-      return err;
-    }
+  async create(userID, title, description, calories, type, image) {
+    const [id] = await this.db("recipe")
+      .insert({
+        userID: userID,
+        title: title,
+        description: description,
+        calories: calories,
+        type: type,
+        image: image,
+      })
+      .returning("id");
+    return id;
   }
 
   async addIngredientToRecipe(recipeID, ingredientID, amount) {

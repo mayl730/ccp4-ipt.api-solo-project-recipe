@@ -51,9 +51,17 @@ router.get("/ingredient/:name", async (req, res) => {
 // POST a recipe
 router.post("/", async (req, res) => {
   try {
-    const { id, userID, title, description, calories, type, image } = req.body;
-    await Recipe.create(id, userID, title, description, calories, type, image);
-    return res.status(201).send(["Recipe is created!", req.body]).end();
+    const { userID, title, description, calories, type, image } = req.body;
+    console.log(req.body);
+    const id = await Recipe.create(
+      userID,
+      title,
+      description,
+      calories,
+      type,
+      image
+    );
+    return res.status(201).json(id).end();
   } catch (err) {
     return res.status(204).send(err).end();
   }
