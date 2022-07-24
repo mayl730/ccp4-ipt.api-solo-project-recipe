@@ -46,5 +46,9 @@ exports.seed = async function (knex) {
       id: 10,
       name: "Water",
     },
+    {
+      id: 11,
+      name: "None",
+    },
   ]);
 };
