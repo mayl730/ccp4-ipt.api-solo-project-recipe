@@ -38,7 +38,7 @@ router.get("/:idOrName", async (req, res) => {
 });
 
 // Get Recipe By Ingredients
-router.get("/ingredient/:name", async (req, res) => {
+router.get("/ingredients/:name", async (req, res) => {
   try {
     const param = req.params.name;
     const recipe = await Recipe.findByIngredient(param);
@@ -52,7 +52,6 @@ router.get("/ingredient/:name", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { userID, title, description, calories, type, image } = req.body;
-    console.log(req.body);
     const id = await Recipe.create(
       userID,
       title,

@@ -8,7 +8,7 @@ router.use(express.json());
 // Get All
 router.get("/", async (req, res) => {
   try {
-    const ingredient = await Recipe.findManyIngrident();
+    const ingredient = await Ingredient.findManyIngrident();
     return res.send(ingredient).status(200);
   } catch (err) {
     return res.status(404).send(err).end();
@@ -18,12 +18,9 @@ router.get("/", async (req, res) => {
 // Post an ingredient
 router.post("/", async (req, res) => {
   try {
-    const { id, name, description } = req.body;
-    await Recipe.addIngredient(id, name, description);
-    return res
-      .status(201)
-      .send(["Ingredient is added to the ingredient list!", req.body])
-      .end();
+    const { name, description } = req.body;
+    const id = await Ingredient.create(name, description);
+    return res.status(201).json(id).end();
   } catch (err) {
     return res.status(204).send(err).end();
   }

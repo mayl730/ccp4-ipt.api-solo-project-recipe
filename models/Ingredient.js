@@ -6,6 +6,24 @@ class Ingredient {
     this.db = require("../src/knex");
   }
 
+  async findManyIngrident() {
+    try {
+      return await this.db.select("*").from("ingredient").timeout(1500);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async create(name, description) {
+    const [id] = await this.db("ingredient")
+      .insert({
+        name: name,
+        description: description,
+      })
+      .returning("id");
+    return id;
+  }
+
   async update(id, name, description) {
     try {
       await this.db("ingredient")
