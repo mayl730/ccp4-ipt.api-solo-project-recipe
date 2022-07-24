@@ -69,13 +69,14 @@ router.post("/", async (req, res) => {
 // POST ingredient to a Recipe
 router.post("/:id/ingredient", async (req, res) => {
   try {
-    const id = req.params.id;
+    const recipeID = req.params.id;
     const { ingredientID, amount } = req.body;
-    await Recipe.addIngredientToRecipe(id, ingredientID, amount);
-    return res
-      .status(201)
-      .send(["Ingredient is added to a recipe!", req.body])
-      .end();
+    const id = await Recipe.addIngredientToRecipe(
+      recipeID,
+      ingredientID,
+      amount
+    );
+    return res.status(201).json(id).end();
   } catch (err) {
     return res.status(204).send(err).end();
   }

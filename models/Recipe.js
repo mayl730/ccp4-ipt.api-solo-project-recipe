@@ -161,18 +161,14 @@ class Recipe {
   }
 
   async addIngredientToRecipe(recipeID, ingredientID, amount) {
-    try {
-      await this.db("recipe_ingredient")
-        .insert({
-          recipe_id: recipeID,
-          ingredient_id: ingredientID,
-          amount: amount,
-        })
-        .timeout(1500);
-      return "Successfully added ingredient to a recipe!";
-    } catch (err) {
-      return err;
-    }
+    const [id] = await this.db("recipe_ingredient")
+      .insert({
+        recipe_id: recipeID,
+        ingredient_id: ingredientID,
+        amount: amount,
+      })
+      .returning("id");
+    return id;
   }
 
   async update(id, userID, title, description, calories, type) {

@@ -33,7 +33,7 @@ router.patch("/:id", async (req, res) => {
     await Ingredient.update(name, description);
     return res
       .status(200)
-      .send([`Ingredient is updated! id: ${id}`, req.body])
+      .send(["Ingredient is updated! id: ", id, req.body])
       .end();
   } catch (err) {
     return res.status(404).send(err).end();
