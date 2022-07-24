@@ -211,18 +211,15 @@ Get all ingredient from the database.
 [
   {
       "id": 1,
-      "name": "Egg",
-      "description": "Egg from local farm"
+      "name": "Egg"
   },
   {
       "id": 2,
-      "name": "Rice",
-      "description": "Basic Rice"
+      "name": "Rice"
   },
   {
       "id": 3,
-      "name": "Pineapple",
-      "description": "Fruits from can"
+      "name": "Pineapple"
   }
 ]
 ```
@@ -233,20 +230,7 @@ Create a recipe. Please follow the JSON request format below:
 
 ```JSON
 {
-  "id": 11,
-  "name": "Sea Food Mixture",
-  "description": "Easy to buy in a local super market"
-}
-```
-
-- `PATCH api/ingredient/{id}`
-
-Update an ingredient with provided id.
-
-```JSON
-{
-  "name": "Herb Mixture",
-  "description": "Easy to buy in a local store"
+  "name": "Sea Food Mixture"
 }
 ```
 
@@ -256,7 +240,6 @@ Delete an ingredient with provided id.
 
 ```JSON
 {
-  "name": "Herb Mixture",
-  "description": "Easy to buy in a local store"
+  "name": "Herb Mixture"
 }
 ```
