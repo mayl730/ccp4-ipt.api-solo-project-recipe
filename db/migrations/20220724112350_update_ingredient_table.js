@@ -3,8 +3,8 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.table("recipe_ingredient", function (table) {
-    table.increments("id").primary();
+  return knex.schema.table("ingredient", function (table) {
+    table.dropColumn("description");
   });
 };
 
@@ -13,7 +13,7 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.table("recipe_ingredient", function (table) {
-    table.dropColumn("id");
+  return knex.schema.table("ingredient", function (table) {
+    table.string("description").notNullable();
   });
 };

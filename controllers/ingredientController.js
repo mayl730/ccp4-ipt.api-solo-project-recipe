@@ -25,21 +25,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Update an Ingredient
-router.patch("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const { name, description } = req.body;
-    await Ingredient.update(name, description);
-    return res
-      .status(200)
-      .send(["Ingredient is updated! id: ", id, req.body])
-      .end();
-  } catch (err) {
-    return res.status(404).send(err).end();
-  }
-});
-
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
