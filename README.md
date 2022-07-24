@@ -17,6 +17,23 @@ This was created during my time as a student at Code Chrysalis.
 Recipe & Ingredients Database, There is also a table to connect 2 tables together.
 ![image](./images/recipe_db_structure.png)
 
+## How to run the server locally
+
+1. This database & API is made on PostgreSQL. Please install PostgreSQL & create the recipe api database on you local machine.
+2. Create your own .env.local with the data below:
+
+```
+DB_USER=your database username
+DB_PASSWORD=your database password
+DB_NAME=your database name
+```
+
+3. After the database is created, please try to run your server local by the command below:
+
+```
+npm start
+```
+
 ## API Endpoints
 
 ### Recipe
