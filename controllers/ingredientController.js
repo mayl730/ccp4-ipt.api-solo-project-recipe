@@ -1,11 +1,10 @@
 const express = require("express");
 const { route } = require("express/lib/application");
 const Ingredient = require("../models/Ingredient");
-const Recipe = require("../models/Recipe");
 const router = express.Router();
 
 router.use(express.json());
-// Get All
+// Get All Ingredients
 router.get("/", async (req, res) => {
   try {
     const ingredient = await Ingredient.findManyIngrident();
