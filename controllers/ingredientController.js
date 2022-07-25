@@ -2,13 +2,28 @@ const express = require("express");
 const { route } = require("express/lib/application");
 const Ingredient = require("../models/Ingredient");
 const router = express.Router();
+const utils = require("../src/utils/utils");
 
 router.use(express.json());
 // Get All Ingredients
 router.get("/", async (req, res) => {
   try {
-    const ingredient = await Ingredient.findManyIngrident();
+    const ingredient = await Ingredient.findManyIngredient();
     return res.send(ingredient).status(200);
+  } catch (err) {
+    return res.status(404).send(err).end();
+  }
+});
+
+// Get By ID or Name
+router.get("/:idOrName", async (req, res) => {
+  try {
+    let param = req.params.idOrName;
+    if (!utils.processIdOrName(param)) {
+      param = param.toLowerCase();
+    }
+    const ingredient = await Ingredient.findOneIngredient(param);
+    res.send(ingredient).status(200);
   } catch (err) {
     return res.status(404).send(err).end();
   }

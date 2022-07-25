@@ -1,7 +1,9 @@
 const express = require("express");
 const { route } = require("express/lib/application");
+const Ingredient = require("../models/Ingredient");
 const Recipe = require("../models/Recipe");
 const router = express.Router();
+const utils = require("../src/utils/utils");
 
 router.use(express.json());
 // Get All Recipes
@@ -29,7 +31,10 @@ router.get("/", async (req, res) => {
 // Get By ID or Name
 router.get("/:idOrName", async (req, res) => {
   try {
-    const param = req.params.idOrName;
+    let param = req.params.idOrName;
+    if (!utils.processIdOrName(param)) {
+      param = param.toLowerCase();
+    }
     const recipe = await Recipe.findOne(param);
     res.send(recipe).status(200);
   } catch (err) {
@@ -43,6 +48,17 @@ router.get("/ingredient/:name", async (req, res) => {
     const param = req.params.name;
     const recipe = await Recipe.findByIngredient(param);
     res.send(recipe).status(200);
+  } catch (err) {
+    return res.status(404).send(err).end();
+  }
+});
+
+// Get Recipe's Ingredients
+router.get("/:id/ingredients/", async (req, res) => {
+  try {
+    const param = req.params.id;
+    const ingredients = await Recipe.findRecipeIngredientsById(param);
+    res.send(ingredients).status(200);
   } catch (err) {
     return res.status(404).send(err).end();
   }
@@ -66,12 +82,12 @@ router.post("/", async (req, res) => {
   }
 });
 
-// POST ingredient to a Recipe
+// Create ingredient to a Recipe
 router.post("/:id/ingredient", async (req, res) => {
   try {
     const recipeID = req.params.id;
     const { ingredientID, amount } = req.body;
-    const id = await Recipe.addIngredientToRecipe(
+    const id = await Recipe.createIngredientToRecipe(
       recipeID,
       ingredientID,
       amount
@@ -79,6 +95,17 @@ router.post("/:id/ingredient", async (req, res) => {
     return res.status(201).json(id).end();
   } catch (err) {
     return res.status(204).send(err).end();
+  }
+});
+
+// Remove ingredient in a Recipe
+router.delete("/ingredient/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Recipe.deleteIngredientToRecipe(id);
+    return res.status(200).json(id).end();
+  } catch (err) {
+    return res.status(404).send(err).end();
   }
 });
 

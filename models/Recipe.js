@@ -68,7 +68,7 @@ class Recipe {
             image: "recipe.image",
           })
           .from("recipe")
-          .where("recipe.title", idOrName)
+          .whereRaw(`LOWER(recipe.title) LIKE ?`, [`%${idOrName}%`])
           .orderBy("recipe.id")
           .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
           .join(
@@ -77,7 +77,7 @@ class Recipe {
             " ingredient.id"
           )
           .then((resultBefore) => {
-            return utils.recipeObject(resultBefore)[0];
+            return utils.recipeObject(resultBefore);
           });
       }
     } catch (err) {
@@ -101,7 +101,7 @@ class Recipe {
         .where("recipe.id", "<=", limit)
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
-        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
         .then((resultBefore) => {
           return utils.recipeObject(resultBefore);
         });
@@ -137,10 +137,29 @@ class Recipe {
         .where("ingredient.name", "=", param)
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
-        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
         .then((resultBefore) => {
           return utils.recipeObject(resultBefore);
         });
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async findRecipeIngredientsById(param) {
+    try {
+      return await this.db
+        .select({
+          id: "recipe_ingredient.id",
+          recipe_id: "recipe_ingredient.recipe_id",
+          ingredient_id: "recipe_ingredient.ingredient_id",
+          name: "name",
+          amount: "amount",
+        })
+        .from("recipe_ingredient")
+        .where("recipe_ingredient.recipe_id", "=", param)
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
+        .timeout(1500);
     } catch (err) {
       return err;
     }
@@ -160,7 +179,8 @@ class Recipe {
     return id;
   }
 
-  async addIngredientToRecipe(recipeID, ingredientID, amount) {
+  // Create ingredient to a Recipe
+  async createIngredientToRecipe(recipeID, ingredientID, amount) {
     const [id] = await this.db("recipe_ingredient")
       .insert({
         recipe_id: recipeID,
@@ -169,6 +189,16 @@ class Recipe {
       })
       .returning("id");
     return id;
+  }
+
+  // Remove ingredient in a Recipe
+  async deleteIngredientToRecipe(id) {
+    try {
+      await this.db("recipe_ingredient").where("id", "=", id).del();
+      return "Sucessfully deleted!";
+    } catch (err) {
+      return err;
+    }
   }
 
   async update(id, userID, title, description, calories, type) {
