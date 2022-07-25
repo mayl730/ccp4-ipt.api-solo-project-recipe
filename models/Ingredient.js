@@ -36,7 +36,7 @@ class Ingredient {
     }
   }
 
-  async create(name, description) {
+  async create(name) {
     const [id] = await this.db("ingredient")
       .insert({
         name: name,

@@ -68,7 +68,7 @@ class Recipe {
             image: "recipe.image",
           })
           .from("recipe")
-          .where("recipe.title", idOrName)
+          .whereRaw(`LOWER(recipe.title) LIKE ?`, [`%${idOrName}%`])
           .orderBy("recipe.id")
           .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
           .join(

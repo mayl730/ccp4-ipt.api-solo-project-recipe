@@ -2,6 +2,7 @@ const express = require("express");
 const { route } = require("express/lib/application");
 const Recipe = require("../models/Recipe");
 const router = express.Router();
+const utils = require("../src/utils/utils");
 
 router.use(express.json());
 // Get All Recipes
@@ -29,7 +30,10 @@ router.get("/", async (req, res) => {
 // Get By ID or Name
 router.get("/:idOrName", async (req, res) => {
   try {
-    const param = req.params.idOrName;
+    let param = req.params.idOrName;
+    if (!utils.processIdOrName(param)) {
+      param = param.toLowerCase();
+    }
     const recipe = await Recipe.findOne(param);
     res.send(recipe).status(200);
   } catch (err) {
