@@ -77,7 +77,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// POST ingredient to a Recipe
+// Create ingredient to a Recipe
 router.post("/:id/ingredient", async (req, res) => {
   try {
     const recipeID = req.params.id;
@@ -92,6 +92,10 @@ router.post("/:id/ingredient", async (req, res) => {
     return res.status(204).send(err).end();
   }
 });
+
+// Edit ingredient in a Recipe
+
+// Remove ingredient in a Recipe
 
 // Update a Recipe
 router.patch("/:id", async (req, res) => {

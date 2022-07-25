@@ -157,16 +157,6 @@ class Recipe {
     } catch (err) {
       return err;
     }
-    // SELECT recipe_ingredient.id, recipe_id, amount, ingredient_id, name FROM public.recipe_ingredient
-    // INNER JOIN ingredient
-    // ON recipe_ingredient.ingredient_id = ingredient.id;
-    // {
-    //   id: "recipe_ingredient.id",
-    //   recipe_id: "recipe_ingredient.recipe_id",
-    //   amount: "recipe_ingredient.amount",
-    //   ingredient_id: "recipe_ingredient.ingredient_id",
-    //   name: "ingredient.name",
-    // }
   }
 
   async create(userID, title, description, calories, type, image) {

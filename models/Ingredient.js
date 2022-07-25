@@ -1,3 +1,4 @@
+const { util } = require("chai");
 const { reduceRight } = require("lodash");
 const utils = require("../src/utils/utils");
 
@@ -6,9 +7,30 @@ class Ingredient {
     this.db = require("../src/knex");
   }
 
-  async findManyIngrident() {
+  async findManyIngredient() {
     try {
       return await this.db.select("*").from("ingredient").timeout(1500);
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async findOneIngredient(idOrName) {
+    try {
+      if (utils.processIdOrName(idOrName)) {
+        return await this.db
+          .select("*")
+          .from("ingredient")
+          .where("ingredient.id", idOrName)
+          .timeout(1500);
+      }
+      if (!utils.processIdOrName(idOrName)) {
+        return await this.db
+          .select(["*"])
+          .from("ingredient")
+          .whereRaw(`LOWER(ingredient.name) LIKE ?`, [`%${idOrName}%`])
+          .timeout(1500);
+      }
     } catch (err) {
       return err;
     }
