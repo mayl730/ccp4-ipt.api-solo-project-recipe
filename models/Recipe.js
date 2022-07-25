@@ -4,20 +4,22 @@ const utils = require("../src/utils/utils");
 class Recipe {
   constructor() {
     this.db = require("../src/knex");
+    this.recipeObj = {
+      id: "recipe.id",
+      title: "recipe.title",
+      description: "recipe.description",
+      calories: "recipe.calories",
+      type: "recipe.type",
+      ingredient: "ingredient.name",
+      instruction: "recipe.instruction",
+      image: "recipe.image",
+    };
   }
 
   async findMany() {
     try {
       return await this.db
-        .select({
-          id: "recipe.id",
-          title: "recipe.title",
-          description: "recipe.description",
-          calories: "recipe.calories",
-          type: "recipe.type",
-          ingredient: "ingredient.name",
-          image: "recipe.image",
-        })
+        .select(this.recipeObj)
         .from("recipe")
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
@@ -33,15 +35,7 @@ class Recipe {
     try {
       if (utils.processIdOrName(idOrName)) {
         return await this.db
-          .select({
-            id: "recipe.id",
-            title: "recipe.title",
-            description: "recipe.description",
-            calories: "recipe.calories",
-            type: "recipe.type",
-            ingredient: "ingredient.name",
-            image: "recipe.image",
-          })
+          .select(this.recipeObj)
           .from("recipe")
           .where("recipe.id", idOrName)
           .orderBy("recipe.id")
@@ -58,15 +52,7 @@ class Recipe {
 
       if (!utils.processIdOrName(idOrName)) {
         return await this.db
-          .select({
-            id: "recipe.id",
-            title: "recipe.title",
-            description: "recipe.description",
-            calories: "recipe.calories",
-            type: "recipe.type",
-            ingredient: "ingredient.name",
-            image: "recipe.image",
-          })
+          .select(this.recipeObj)
           .from("recipe")
           .whereRaw(`LOWER(recipe.title) LIKE ?`, [`%${idOrName}%`])
           .orderBy("recipe.id")
@@ -88,15 +74,7 @@ class Recipe {
   async findByLimit(limit) {
     try {
       return await this.db
-        .select({
-          id: "recipe.id",
-          title: "recipe.title",
-          description: "recipe.description",
-          calories: "recipe.calories",
-          type: "recipe.type",
-          ingredient: "ingredient.name",
-          image: "recipe.image",
-        })
+        .select(this.recipeObj)
         .from("recipe")
         .where("recipe.id", "<=", limit)
         .orderBy("recipe.id")
@@ -124,15 +102,7 @@ class Recipe {
   async findByIngredient(param) {
     try {
       return await this.db
-        .select({
-          id: "recipe.id",
-          title: "recipe.title",
-          description: "recipe.description",
-          calories: "recipe.calories",
-          type: "recipe.type",
-          ingredient: "ingredient.name",
-          image: "recipe.image",
-        })
+        .select(this.recipeObj)
         .from("recipe")
         .where("ingredient.name", "=", param)
         .orderBy("recipe.id")
@@ -165,7 +135,7 @@ class Recipe {
     }
   }
 
-  async create(userID, title, description, calories, type, image) {
+  async create(userID, title, description, calories, type, instruction, image) {
     const [id] = await this.db("recipe")
       .insert({
         userID: userID,
@@ -173,6 +143,7 @@ class Recipe {
         description: description,
         calories: calories,
         type: type,
+        instruction: instruction,
         image: image,
       })
       .returning("id");
@@ -201,7 +172,7 @@ class Recipe {
     }
   }
 
-  async update(id, userID, title, description, calories, type) {
+  async update(id, userID, title, description, calories, instruction, type) {
     try {
       await this.db("recipe")
         .where("id", "=", id)
@@ -210,6 +181,7 @@ class Recipe {
           title: title,
           description: description,
           calories: calories,
+          instruction: instruction,
           type: type,
         })
         .timeout(1500);
