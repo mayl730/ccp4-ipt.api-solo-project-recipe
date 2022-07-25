@@ -149,7 +149,13 @@ class Recipe {
   async findRecipeIngredientsById(param) {
     try {
       return await this.db
-        .select(["*"])
+        .select({
+          id: "recipe_ingredient.id",
+          recipe_id: "recipe_ingredient.recipe_id",
+          ingredient_id: "recipe_ingredient.ingredient_id",
+          name: "name",
+          amount: "amount",
+        })
         .from("recipe_ingredient")
         .where("recipe_ingredient.recipe_id", "=", param)
         .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
@@ -173,7 +179,8 @@ class Recipe {
     return id;
   }
 
-  async addIngredientToRecipe(recipeID, ingredientID, amount) {
+  // Create ingredient to a Recipe
+  async createIngredientToRecipe(recipeID, ingredientID, amount) {
     const [id] = await this.db("recipe_ingredient")
       .insert({
         recipe_id: recipeID,
@@ -182,6 +189,16 @@ class Recipe {
       })
       .returning("id");
     return id;
+  }
+
+  // Remove ingredient in a Recipe
+  async deleteIngredientToRecipe(id) {
+    try {
+      await this.db("recipe_ingredient").where("id", "=", id).del();
+      return "Sucessfully deleted!";
+    } catch (err) {
+      return err;
+    }
   }
 
   async update(id, userID, title, description, calories, type) {

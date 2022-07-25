@@ -1,5 +1,6 @@
 const express = require("express");
 const { route } = require("express/lib/application");
+const Ingredient = require("../models/Ingredient");
 const Recipe = require("../models/Recipe");
 const router = express.Router();
 const utils = require("../src/utils/utils");
@@ -86,7 +87,7 @@ router.post("/:id/ingredient", async (req, res) => {
   try {
     const recipeID = req.params.id;
     const { ingredientID, amount } = req.body;
-    const id = await Recipe.addIngredientToRecipe(
+    const id = await Recipe.createIngredientToRecipe(
       recipeID,
       ingredientID,
       amount
@@ -97,9 +98,16 @@ router.post("/:id/ingredient", async (req, res) => {
   }
 });
 
-// Edit ingredient in a Recipe
-
 // Remove ingredient in a Recipe
+router.delete("/ingredient/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Recipe.deleteIngredientToRecipe(id);
+    return res.status(200).json(id).end();
+  } catch (err) {
+    return res.status(404).send(err).end();
+  }
+});
 
 // Update a Recipe
 router.patch("/:id", async (req, res) => {
