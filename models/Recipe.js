@@ -77,7 +77,7 @@ class Recipe {
             " ingredient.id"
           )
           .then((resultBefore) => {
-            return utils.recipeObject(resultBefore)[0];
+            return utils.recipeObject(resultBefore);
           });
       }
     } catch (err) {
