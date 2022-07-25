@@ -101,7 +101,7 @@ class Recipe {
         .where("recipe.id", "<=", limit)
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
-        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
         .then((resultBefore) => {
           return utils.recipeObject(resultBefore);
         });
@@ -137,13 +137,36 @@ class Recipe {
         .where("ingredient.name", "=", param)
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
-        .join("ingredient", "recipe_ingredient.ingredient_id", " ingredient.id")
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
         .then((resultBefore) => {
           return utils.recipeObject(resultBefore);
         });
     } catch (err) {
       return err;
     }
+  }
+
+  async findRecipeIngredientsById(param) {
+    try {
+      return await this.db
+        .select(["*"])
+        .from("recipe_ingredient")
+        .where("recipe_ingredient.recipe_id", "=", param)
+        .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
+        .timeout(1500);
+    } catch (err) {
+      return err;
+    }
+    // SELECT recipe_ingredient.id, recipe_id, amount, ingredient_id, name FROM public.recipe_ingredient
+    // INNER JOIN ingredient
+    // ON recipe_ingredient.ingredient_id = ingredient.id;
+    // {
+    //   id: "recipe_ingredient.id",
+    //   recipe_id: "recipe_ingredient.recipe_id",
+    //   amount: "recipe_ingredient.amount",
+    //   ingredient_id: "recipe_ingredient.ingredient_id",
+    //   name: "ingredient.name",
+    // }
   }
 
   async create(userID, title, description, calories, type, image) {
