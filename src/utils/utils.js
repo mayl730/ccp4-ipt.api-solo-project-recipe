@@ -21,6 +21,7 @@ const utlis = {
           calories: data.calories,
           type: data.type,
           ingredients: [data.ingredient],
+          instruction: data.instruction,
           image: data.image,
         };
         resultAfter.push(newData);
