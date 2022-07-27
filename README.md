@@ -236,7 +236,7 @@ Create a recipe. Please follow the JSON request format below:
 
 - `Delete api/ingredient/{id}`
 
-Delete an ingredient with provided id.
+Delete an ingredient with provided id..
 
 ```JSON
 {
