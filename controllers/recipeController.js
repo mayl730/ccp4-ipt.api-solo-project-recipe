@@ -45,7 +45,7 @@ router.get("/:idOrName", async (req, res) => {
 // Get Recipe By Ingredients
 router.get("/ingredient/:name", async (req, res) => {
   try {
-    const param = req.params.name;
+    const param = req.params.name.toLowerCase();
     const recipe = await Recipe.findByIngredient(param);
     res.send(recipe).status(200);
   } catch (err) {
