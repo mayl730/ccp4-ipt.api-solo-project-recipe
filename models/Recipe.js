@@ -104,7 +104,8 @@ class Recipe {
       return await this.db
         .select(this.recipeObj)
         .from("recipe")
-        .where("ingredient.name", "=", param)
+        // .where("ingredient.name", "=", param)
+        .whereRaw(`LOWER(ingredient.name) LIKE ?`, [`%${param}%`])
         .orderBy("recipe.id")
         .join("recipe_ingredient", "recipe_ingredient.recipe_id", "recipe.id")
         .join("ingredient", "recipe_ingredient.ingredient_id", "ingredient.id")
