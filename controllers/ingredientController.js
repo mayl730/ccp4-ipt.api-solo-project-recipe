@@ -32,8 +32,8 @@ router.get("/:idOrName", async (req, res) => {
 // Post an ingredient
 router.post("/", async (req, res) => {
   try {
-    const { name, description } = req.body;
-    const id = await Ingredient.create(name, description);
+    const { name } = req.body;
+    const id = await Ingredient.create(name);
     return res.status(201).json(id).end();
   } catch (err) {
     return res.status(204).send(err).end();

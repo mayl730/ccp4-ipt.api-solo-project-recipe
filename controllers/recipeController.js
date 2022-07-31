@@ -67,13 +67,15 @@ router.get("/:id/ingredients/", async (req, res) => {
 // POST a recipe
 router.post("/", async (req, res) => {
   try {
-    const { userID, title, description, calories, type, image } = req.body;
+    const { userID, title, description, calories, type, instruction, image } =
+      req.body;
     const id = await Recipe.create(
       userID,
       title,
       description,
       calories,
       type,
+      instruction,
       image
     );
     return res.status(201).json(id).end();
