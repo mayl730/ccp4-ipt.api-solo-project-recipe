@@ -244,4 +244,4 @@ Delete an ingredient with provided id..
 }
 ```
 
-row for deploymentt
+row for deployment
