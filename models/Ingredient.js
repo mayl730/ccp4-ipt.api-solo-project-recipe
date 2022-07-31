@@ -36,13 +36,18 @@ class Ingredient {
   }
 
   async create(name) {
-    const [id] = await this.db("ingredient")
-      .insert({
-        name: name,
-      })
-      .returning("id");
-    return id;
+    try {
+      const [id] = await this.db("ingredient")
+        .insert({
+          name: name,
+        })
+        .returning("id");
+      return id;
+    } catch (err) {
+      return err;
+    }
   }
+
   async delete(id) {
     try {
       await this.db("ingredient").where("id", "=", id).del();
