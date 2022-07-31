@@ -136,30 +136,38 @@ class Recipe {
   }
 
   async create(userID, title, description, calories, type, instruction, image) {
-    const [id] = await this.db("recipe")
-      .insert({
-        userID: userID,
-        title: title,
-        description: description,
-        calories: calories,
-        type: type,
-        instruction: instruction,
-        image: image,
-      })
-      .returning("id");
-    return id;
+    try {
+      const [id] = await this.db("recipe")
+        .insert({
+          userID: userID,
+          title: title,
+          description: description,
+          calories: calories,
+          type: type,
+          instruction: instruction,
+          image: image,
+        })
+        .returning("id");
+      return id;
+    } catch (err) {
+      return err;
+    }
   }
 
   // Create ingredient to a Recipe
   async createIngredientToRecipe(recipeID, ingredientID, amount) {
-    const [id] = await this.db("recipe_ingredient")
-      .insert({
-        recipe_id: recipeID,
-        ingredient_id: ingredientID,
-        amount: amount,
-      })
-      .returning("id");
-    return id;
+    try {
+      const [id] = await this.db("recipe_ingredient")
+        .insert({
+          recipe_id: recipeID,
+          ingredient_id: ingredientID,
+          amount: amount,
+        })
+        .returning("id");
+      return id;
+    } catch (err) {
+      return err;
+    }
   }
 
   // Remove ingredient in a Recipe
