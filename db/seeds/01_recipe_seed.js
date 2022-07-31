@@ -16,7 +16,7 @@ exports.seed = async function (knex) {
       instruction:
         "1. Put egg on rice\n2. Put them in pan fry\n3. Eat Egg Fried Rice",
       image:
-        "https://firebasestorage.googleapis.com/v0/b/fast-recipe-7aa79.appspot.com/o/recipe_image%2Fegg-fried-rice.jpg?alt=media&token=bd52eb8a-d8da-4b41-9528-5ff9e3560526",
+        "https://firebasestorage.googleapis.com/v0/b/fast-recipe-7aa79.appspot.com/o/recipe_image%2Fegg-fried-rice.jpg?alt=media&token=4cbc34c0-1000-477c-a627-5de4951ad887",
     },
     {
       id: 2,
