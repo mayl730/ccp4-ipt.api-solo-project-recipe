@@ -115,7 +115,7 @@ router.delete("/ingredient/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const { userID, title, description, calories, instruction, type } =
+    const { userID, title, description, calories, instruction, type, image } =
       req.body;
     await Recipe.update(
       id,
@@ -124,7 +124,8 @@ router.patch("/:id", async (req, res) => {
       description,
       calories,
       instruction,
-      type
+      type,
+      image
     );
     return res
       .status(200)

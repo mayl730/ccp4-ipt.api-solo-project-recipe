@@ -180,7 +180,16 @@ class Recipe {
     }
   }
 
-  async update(id, userID, title, description, calories, instruction, type) {
+  async update(
+    id,
+    userID,
+    title,
+    description,
+    calories,
+    instruction,
+    type,
+    image
+  ) {
     try {
       await this.db("recipe")
         .where("id", "=", id)
@@ -191,6 +200,7 @@ class Recipe {
           calories: calories,
           instruction: instruction,
           type: type,
+          image,
         })
         .timeout(1500);
       return "Successfully updated!";
