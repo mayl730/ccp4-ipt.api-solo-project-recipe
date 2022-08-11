@@ -170,6 +170,21 @@ class Recipe {
     }
   }
 
+  async updateIngredientToRecipe(id, ingredientID, amount) {
+    try {
+      await this.db("recipe_ingredient")
+        .where("id", "=", id)
+        .update({
+          ingredient_id: ingredientID,
+          amount: amount,
+        })
+        .timeout(1500);
+      return "Successfully updated!";
+    } catch (err) {
+      return err;
+    }
+  }
+
   // Remove ingredient in a Recipe
   async deleteIngredientToRecipe(id) {
     try {

@@ -100,6 +100,19 @@ router.post("/:id/ingredient", async (req, res) => {
   }
 });
 
+// Update ingredient in a Recipe
+
+router.patch("/ingredient/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { ingredientID, amount } = req.body;
+    await Recipe.updateIngredientToRecipe(id, ingredientID, amount);
+    return res.status(201).json(id).end();
+  } catch (err) {
+    return res.status(404).send(err).end();
+  }
+});
+
 // Remove ingredient in a Recipe
 router.delete("/ingredient/:id", async (req, res) => {
   try {
