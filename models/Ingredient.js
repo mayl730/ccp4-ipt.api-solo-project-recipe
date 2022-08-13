@@ -29,7 +29,7 @@ class Ingredient {
           .from("ingredient")
           .where("ingredient.name", idOrName)
           .timeout(1500);
-        // .whereRaw(`LOWER(ingredient.name) LIKE ?`, [`%${idOrName}%`])
+        //
       }
     } catch (err) {
       return err;
