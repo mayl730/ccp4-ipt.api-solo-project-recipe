@@ -27,7 +27,8 @@ class Ingredient {
         return await this.db
           .select(["*"])
           .from("ingredient")
-          .whereRaw(`LOWER(ingredient.name) LIKE ?`, [`%${idOrName}%`])
+          // .whereRaw(`LOWER(ingredient.name) LIKE ?`, [`%${idOrName}%`])
+          .where("ingredient.name", idOrName)
           .timeout(1500);
       }
     } catch (err) {
