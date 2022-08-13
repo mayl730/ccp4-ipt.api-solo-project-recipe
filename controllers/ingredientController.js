@@ -19,9 +19,9 @@ router.get("/", async (req, res) => {
 router.get("/:idOrName", async (req, res) => {
   try {
     let param = req.params.idOrName;
-    if (!utils.processIdOrName(param)) {
-      param = param.toLowerCase();
-    }
+    // if (!utils.processIdOrName(param)) {
+    //   param = param.toLowerCase();
+    // }
     const ingredient = await Ingredient.findOneIngredient(param);
     res.send(ingredient).status(200);
   } catch (err) {
