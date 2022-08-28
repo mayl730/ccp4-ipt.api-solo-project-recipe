@@ -4,7 +4,7 @@ This was created during my time as a student at Code Chrysalis.
 
 Recipe API is a API backend allowing searching recipe by keywords, ingredients or calories. Create, Read, Update & Delete features are also available for both recipes & ingredients.
 
-This API is built with PostgreSQL, Express.js & Knex.js.\
+This API is built with PostgreSQL, Express.js & Knex.js.
 
 ![image](./images/recipe_api_cover.jpg)
 
@@ -262,7 +262,7 @@ Get ingredient item by name
 
 - `GET api/recipe/{recipe id}/ingredients/`
 
-Get all ingredients of a recipe by recipe ID. \
+Get all ingredients of a recipe by recipe ID.
 
 **Response:**
 
