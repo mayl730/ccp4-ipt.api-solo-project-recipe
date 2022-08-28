@@ -1,13 +1,14 @@
 # Recipe API: Find Recipe with Calories or Ingredients
 
-This was created during my time as a student at Code Chrysalis.\
+This was created during my time as a student at Code Chrysalis.
 
-Recipe API is a API backend allowing searching recipe by keywords, ingredients or calories. Create, Read, Update & Delete features are also available for both recipes & ingredients.\
+Recipe API is a API backend allowing searching recipe by keywords, ingredients or calories. Create, Read, Update & Delete features are also available for both recipes & ingredients.
+
 This API is built with PostgreSQL, Express.js & Knex.js.\
 
 ![image](./images/recipe_api_cover.jpg)
 
-You can try the deployed version on: \
+You can try the deployed version on:
 https://fast-recipe-api-psql.herokuapp.com/
 
 ## Features
