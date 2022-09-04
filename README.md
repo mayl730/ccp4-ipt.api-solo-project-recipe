@@ -9,7 +9,7 @@ This API is built with PostgreSQL, Express.js & Knex.js.
 ![image](./images/recipe_api_cover.jpg)
 
 You can try the deployed version on:
-https://fast-recipe-api-psql.herokuapp.com/
+[Heroku](https://fast-recipe-api-psql.herokuapp.com/)
 
 ## Features
 
