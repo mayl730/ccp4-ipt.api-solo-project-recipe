@@ -22,6 +22,7 @@ module.exports = {
     directory: "./db/seeds",
   },
   ssl: { rejectUnauthorized: false },
+  pool: { min: 0, max: 30, acquireTimeoutMillis: 60 * 1000 },
 };
 
 //  process.env.DB_URL ||
