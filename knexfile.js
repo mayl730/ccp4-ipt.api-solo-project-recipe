@@ -22,16 +22,18 @@ module.exports = {
     directory: "./db/seeds",
   },
   ssl: { rejectUnauthorized: false },
+  acquireConnectionTimeout: 1000000,
   pool: {
-    min: 2,
-    max: 6,
-    createTimeoutMillis: 3000,
-    acquireTimeoutMillis: 30000,
+    min: 0,
+    max: 1,
+    acquireTimeoutMillis: 300000,
+    createTimeoutMillis: 300000,
+    destroyTimeoutMillis: 300000,
     idleTimeoutMillis: 30000,
     reapIntervalMillis: 1000,
-    createRetryIntervalMillis: 100,
-    propagateCreateError: false, // <- default is true, set to false
+    createRetryIntervalMillis: 2000,
   },
+  debug: false,
 };
 
 //  process.env.DB_URL ||
