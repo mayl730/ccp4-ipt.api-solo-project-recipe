@@ -22,7 +22,7 @@ module.exports = {
     directory: "./db/seeds",
   },
   ssl: { rejectUnauthorized: false },
-  acquireConnectionTimeout: 1000000,
+  acquireConnectionTimeout: 10000,
   pool: {
     min: 0,
     max: 1,
